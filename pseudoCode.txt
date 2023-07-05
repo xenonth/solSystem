@@ -1,1 +1,15 @@
+##Outline
 
+Step 1.
+Create each planet as a sphere which rotates around a central point the Sun at scaled down rates using suboptimal engineer's guide.
+
+Step 2.
+Will need to grab a flat image of each sphere then wrap it to the correct sphereGeometry
+
+Step 3.
+Each sphere spin on their axis at the correct rates
+
+Due to increased complexity of this project will attempt to modulate the planetary Sphere and call it into Main.JS
+
+Future updates once mastered:
+If still interested and time allows, add html information that displays when each object is hovered over.
