@@ -3,6 +3,9 @@
 Step 1.
 Create each planet as a sphere which rotates around a central point the Sun at scaled down rates using suboptimal engineer's guide.
 
+Additional features:
+create a zoom in/out feature which adjusts according to mouse wheel movement
+
 Step 2.
 Will need to grab a flat image of each sphere then wrap it to the correct sphereGeometry
 

@@ -13,4 +13,13 @@ export default class SceneInit {
         this.camera = camera;
         this.renderer = renderer;
     }
+    initScene() {
+        this.camera = THREE.PerspectiveCamera(
+            this.fov,
+            window.innerWidth/window.innerHeight,
+            1,
+            1000
+        );
+        this.camera.position.z = 128;
+    }
 }
