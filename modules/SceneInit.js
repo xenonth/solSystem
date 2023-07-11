@@ -6,7 +6,7 @@ import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import Stats from "three/examples/jsm/libs/stats.module";
 
 export default class SceneInit {
-    constructor (fov = 36, scene, stats, camera, controls, renderer, cameraMovementSpeed, zoomSpeed) {
+    constructor (fov = 36, scene, stats, camera, controls, renderer) {
         this.fov = fov;
         this.scene = scene;
         this.stats = stats;
