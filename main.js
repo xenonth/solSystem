@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import SceneInit from "./modules/SceneInit";
 import Planet from './modules/Planet';
+import Rotation from './modules/Rotation';
 
 let solScene = new SceneInit();
 
@@ -8,8 +9,8 @@ solScene.initScene();
 solScene.animate();
 
 //add starbackground
-const starBackground = new THREE.TextureLoader().load('images/background.jpg');
-solScene.scene.background = starBackground;
+//const starBackground = new THREE.TextureLoader().load('images/background.jpg');
+//solScene.scene.background = starBackground;
 
 //variables to create sungeometry
 const sunGeometry = new THREE.SphereGeometry(8);
@@ -17,24 +18,55 @@ const sunTexture = new THREE.TextureLoader().load("./images/sun.jpg");
 const sunMaterial = new THREE.MeshBasicMaterial({map: sunTexture});
 const sunMesh = new THREE.Mesh(sunGeometry, sunMaterial);
 
-//rendering the sun to the scene.
 const solarSystem = new THREE.Group();
 solarSystem.add(sunMesh);
-solSystem.scene.add(solarSystem);
 
-const planetsOfSol = [
-    new Planet (5, 0, "./images/mercury.jpg"),
-];
+//mercury body
+const mercury = new Planet(2, 16, "./images/mercury.jpg");
+const mercuryMesh = mercury.getMesh();
+let mercurySystem = new THREE.Group();
+mercurySystem.add(mercuryMesh);
 
-//render planets array to the screen via for loop
-planetsOfSol.forEach(planet => {
-    const planetSystem = new THREE.Group();
-    const planetGeometry = new THREE.SphereGeometry(planet.radius);
-    const planetTexture = new THREE.TextureLoader().load(planet.textureFile);
-    const planetMaterial = new THREE.MeshBasicMaterial({ map: planetTexture });
-    const planetMesh = new THREE.Mesh(planetGeometry, planetMaterial);
-    planetSystem.add(planetMesh);
-    solarSystem.add(planetSystem);
-})
+//venus body
+const venus = new Planet(3, 32, "./images/venus.jpg");
+const venusMesh = venus.getMesh();
+let venusSystem = new THREE.Group();
+venusSystem.add(venusMesh);
 
-console.log(solarSystem.planetSystem);
+//Earth System
+const earth= new Planet (4, 48, './images/earth.jpg');
+const earthMesh = earth.getMesh();
+let earthSystem = new THREE.Group();
+earthSystem.add(earthMesh);
+
+//Adding each system to the mesh
+solarSystem.add(mercurySystem, venusSystem, earthSystem);
+
+//mercury's rotation around the sun
+const mercuryRotation = new Rotation(mercuryMesh);
+const mercuryRotationMesh = mercuryRotation.getMesh();
+mercurySystem.add(mercuryRotationMesh);
+
+//venus rotation
+const venusRotation = new Rotation(venusSystem);
+const venusRotationMesh = venusRotation.getMesh();
+venusSystem.add(venusRotationMesh);
+
+//earth rotating around the sun
+const earthRotation = new Rotation(earthSystem);
+const earthRotationMesh = earthRotation.getMesh();
+earthSystem.add(earthRotationMesh);
+
+solScene.scene.add(solarSystem);
+
+//animating the solar system
+const EARTH_YEAR = 2 * Math.PI * (1/60) * (1/60);
+const animate = () => {
+    //sunMesh.rotation.y += 0.01;
+    mercurySystem.rotation.y += EARTH_YEAR * 4;
+    venusSystem.rotation.y += EARTH_YEAR * 2;
+    earthSystem.rotation.y += EARTH_YEAR;
+    requestAnimationFrame(animate);
+}
+
+animate();
