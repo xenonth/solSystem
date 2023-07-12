@@ -86,7 +86,7 @@ const animate = () => {
     
     //venus orbital and axial rotation
     venusSystem.rotation.y += EARTH_YEAR * 2;
-    venusSystem.children[0].rotation.y += (EARTH_YEAR / 243) * 2;
+    venusSystem.children[0].rotation.y += (EARTH_YEAR * 1.502);
 
     //earth axial and orbital rotation
     earthSystem.rotation.y += EARTH_YEAR;
@@ -94,7 +94,7 @@ const animate = () => {
 
     //earth axial and orbital rotation
     marsSystem.rotation.y += (EARTH_YEAR / 1.88);
-    marsSystem.children[0].rotation.y += (EARTH_YEAR / 0.973630831643002) * 2;
+    marsSystem.children[0].rotation.y += EARTH_YEAR * 355.6186612576065;
     requestAnimationFrame(animate);
 }
 
