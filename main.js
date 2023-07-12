@@ -2,6 +2,8 @@ import * as THREE from 'three';
 import SceneInit from "./modules/SceneInit";
 import Planet from './modules/Planet';
 import Rotation from './modules/Rotation';
+import createAsteroids from './modules/asteroidCreator';
+
 
 let solScene = new SceneInit();
 
@@ -46,7 +48,11 @@ let marsSystem = new THREE.Group();
 marsSystem.add(marsMesh);
 
 
-//Asteroid Belt? (Unique point geometry x range from sun?)
+//Asteroid Belt function creating number of asteroids and position from centre
+const asteroidBelt = createAsteroids(50, 100);
+solarSystem.add(asteroidBelt);
+
+
 
 //Jupiter, Uranus, Neptune, Pluto + Deimos? in a dual rotation?
 
@@ -95,6 +101,9 @@ const animate = () => {
     //earth axial and orbital rotation
     marsSystem.rotation.y += (EARTH_YEAR / 1.88);
     marsSystem.children[0].rotation.y += EARTH_YEAR * 355.6186612576065;
+
+    //rotate asteroidBelts
+    asteroidBelt.tick();
     requestAnimationFrame(animate);
 }
 
