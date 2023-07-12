@@ -22,19 +22,19 @@ const solarSystem = new THREE.Group();
 solarSystem.add(sunMesh);
 
 //mercury body
-const mercury = new Planet(2, 16, "./images/mercury.jpg");
+const mercury = new Planet(2, 16, "./images/mercury.jpg", 0.03);
 const mercuryMesh = mercury.getMesh();
 let mercurySystem = new THREE.Group();
 mercurySystem.add(mercuryMesh);
 
 //venus body
-const venus = new Planet(3, 32, "./images/venus.jpg");
+const venus = new Planet(3, 32, "./images/venus.jpg", 2.64);
 const venusMesh = venus.getMesh();
 let venusSystem = new THREE.Group();
 venusSystem.add(venusMesh);
 
 //Earth System
-const earth= new Planet (4, 48, './images/earth.jpg');
+const earth= new Planet (4, 48, './images/earth.jpg', 23.5);
 const earthMesh = earth.getMesh();
 let earthSystem = new THREE.Group();
 earthSystem.add(earthMesh);
@@ -60,6 +60,7 @@ earthSystem.add(earthRotationMesh);
 solScene.scene.add(solarSystem);
 
 //animating the solar system
+//1 Earth Year = 1 minute of rotation
 const EARTH_YEAR = 2 * Math.PI * (1/60) * (1/60);
 const animate = () => {
     //sunMesh.rotation.y += 0.01;
